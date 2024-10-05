@@ -14,7 +14,7 @@ class MainWindow(QMainWindow):
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
         
-        self.setWindowTitle("UI to PY Converter")
+        self.setWindowTitle("PySide6 UI to PY Converter")
         self.setFixedSize(543, 203)
         self.setWindowIcon(QIcon('icon.ico'))
         
@@ -32,7 +32,7 @@ class MainWindow(QMainWindow):
     def convert(self):
         self.ui.LblStatus.setText('Starting conversion process...')
         time.sleep(1.5)
-        commend = f'pyside6-uic {self.file_path} -o {self.file_directory}{self.file_name.replace(".ui", ".py")}'
+        commend = f'pyside6-uic {self.file_path} -o {self.file_directory}ui_{self.file_name.replace(".ui", ".py")}'
         if self.file_path == '':
             self.ui.LblStatus.setText('Please select a file first')
             return
@@ -47,7 +47,7 @@ class MainWindow(QMainWindow):
         self.ui.LblFileName.setText(self.file_name)
         self.ui.LblStatus.setText('Selected file')
         self.ui.LblDestinationName.setText(self.file_directory)
-        self.ui.LblFinalPath.setText(f"{self.file_directory}{self.file_name.replace('.ui', '.py')}")
+        self.ui.LblFinalPath.setText(f"{self.file_directory}ui_{self.file_name.replace('.ui', '.py')}")
     
     def select_folder(self):
         self.file_directory = QFileDialog.getExistingDirectory(self, 'Select folder') + '/'
@@ -55,7 +55,7 @@ class MainWindow(QMainWindow):
         self.ui.LblDestinationName.setText(self.file_directory)
         
         self.ui.LblStatus.setText('Selected folder')
-        self.ui.LblFinalPath.setText(f"{self.file_directory}{self.file_name.replace('.ui', '.py')}")
+        self.ui.LblFinalPath.setText(f"{self.file_directory}ui_{self.file_name.replace('.ui', '.py')}")
         
     
     def exit(self):
